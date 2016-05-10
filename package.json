@@ -1,0 +1,28 @@
+{
+  "name": "string2js",
+  "version": "0.0.0",
+  "description": "Create Javascript objects and primitives from their string representation",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/piranna/string2js.git"
+  },
+  "keywords": [
+    "reviver",
+    "objects",
+    "string",
+    "json"
+  ],
+  "author": "Jesús Leganés Combarro 'piranna' <piranna@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/piranna/string2js/issues"
+  },
+  "homepage": "https://github.com/piranna/string2js#readme",
+  "dependencies": {
+    "moment": "^2.13.0"
+  }
+}
