@@ -8,23 +8,26 @@ const regexpRegex = /^\/.*\/[gimuy]*$/
 
 
 /**
- * Check if an object is a number or represent one of them
+ * Create Javascript objects from the string fields on a JSON object
  *
+ * @param {string} key
+ *  key of the JSON object, ignored
  * @param {*} value
- *
- * @return {Boolean}
+ *  value to be converted in a Javascript object
  */
-function isNumber(value)
+function reviver(key, value)
 {
-  return !isNaN(value)
+  return string2js(value)
 }
+
 
 /**
  * Create Javascript objects and primitives from their string representation
  *
- * Promote the string fields to Javascript objects when the server returns a
- * JSON with only strings on its values. The current promotions are {Boolean},
- * {Number}, {RegExp} {duration} and {Date}.
+ * Promote the string value to a Javascript object. The current promotions are
+ * {undefined}, {RegExp}, {moment.duration}, {Date} and {JSON} (that includes
+ * {Boolean}, {Number} and {null}). In case a promotion is not possible, it
+ * return the value as a {string}.
  *
  * @param {*} value
  *  value to be converted in a Javascript object
@@ -34,12 +37,8 @@ function string2js(value)
   // Value is not a string, return it directly
   if(typeof value !== 'string') return value
 
-  // Boolean
-  if(value === 'false') return false
-  if(value === 'true')  return true
-
-  // Number
-  if(isNumber(value)) return parseFloat(value)
+  // Undefined
+  if(value === 'undefined') return
 
   // RegExp
   if(value.match(regexpRegex)) return RegExp(value)
@@ -51,22 +50,17 @@ function string2js(value)
   const date = new Date(value)
   if(date.toString() !== 'Invalid Date') return date
 
+  // JSON
+  try
+  {
+    return JSON.parse(value, reviver)
+  }
+  catch(e){}
+
   // Regular string
   return value
 }
-
-/**
- * Create Javascript objects from the string fields on a JSON object
- *
- * @param {string} key
- *  key of the JSON object, ignored
- * @param {*} value
- *  value to be converted in a Javascript object
- */
-string2js.reviver = function(key, value)
-{
-  return string2js(value)
-}
+string2js.reviver = reviver
 
 
 module.exports = string2js
