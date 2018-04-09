@@ -23,6 +23,6 @@
   },
   "homepage": "https://github.com/piranna/string2js#readme",
   "dependencies": {
-    "moment": "^2.13.0"
+    "moment": "^2.22.0"
   }
 }
