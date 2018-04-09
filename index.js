@@ -2,7 +2,9 @@ var duration = require('moment').duration
 
 
 /* https://github.com/moment/moment/blob/develop/src/lib/duration/create.js */
-const isoRegex = /^(-)?P(?:(?:([0-9,.]*)Y)?(?:([0-9,.]*)M)?(?:([0-9,.]*)D)?(?:T(?:([0-9,.]*)H)?(?:([0-9,.]*)M)?(?:([0-9,.]*)S)?)?|([0-9,.]*)W)$/
+const isoRegex = /^(-|\+)?P(?:([-+]?[0-9,.]*)Y)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0-9,.]*)W)?(?:([-+]?[0-9,.]*)D)?(?:T(?:([-+]?[0-9,.]*)H)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0-9,.]*)S)?)?$/
+
+const regexpRegex = /^\/.*\/[gimuy]*$/
 
 
 // Add a JSON representation for RegExp objects
@@ -44,11 +46,7 @@ function string2js(value)
     if(isNumber(value)) return parseFloat(value)
 
     // RegExp
-    var length = value.length
-    if(length > 1
-    && '/' === value[0]
-    && '/' === value[length-1])
-      return RegExp(value)
+    if(value.match(regexpRegex)) return RegExp(value)
 
     // ISO8601 duration
     if(value.match(isoRegex)) return duration(value)
