@@ -1,4 +1,4 @@
-var duration = require('moment').duration
+const {duration} = require('moment')
 
 
 /* https://github.com/moment/moment/blob/develop/src/lib/duration/create.js */
@@ -31,26 +31,27 @@ function isNumber(value)
  */
 function string2js(value)
 {
-  if(typeof value === 'string')
-  {
-    // Boolean
-    if(value === 'false') return false
-    if(value === 'true')  return true
+  // Value is not a string, return it directly
+  if(typeof value !== 'string') return value
 
-    // Number
-    if(isNumber(value)) return parseFloat(value)
+  // Boolean
+  if(value === 'false') return false
+  if(value === 'true')  return true
 
-    // RegExp
-    if(value.match(regexpRegex)) return RegExp(value)
+  // Number
+  if(isNumber(value)) return parseFloat(value)
 
-    // ISO8601 duration
-    if(value.match(isoRegex)) return duration(value)
+  // RegExp
+  if(value.match(regexpRegex)) return RegExp(value)
 
-    // Date
-    var date = new Date(value)
-    if(date.toString() !== 'Invalid Date') return date
-  }
+  // ISO8601 duration
+  if(value.match(isoRegex)) return duration(value)
 
+  // Date
+  const date = new Date(value)
+  if(date.toString() !== 'Invalid Date') return date
+
+  // Regular string
   return value
 }
 
