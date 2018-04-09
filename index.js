@@ -7,11 +7,6 @@ const isoRegex = /^(-|\+)?P(?:([-+]?[0-9,.]*)Y)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0
 const regexpRegex = /^\/.*\/[gimuy]*$/
 
 
-// Add a JSON representation for RegExp objects
-if(RegExp.prototype.toJSON === undefined)
-   RegExp.prototype.toJSON = RegExp.prototype.toString
-
-
 /**
  * Check if an object is a number or represent one of them
  *
