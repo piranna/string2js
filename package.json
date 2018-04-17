@@ -1,6 +1,6 @@
 {
   "name": "string2js",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Create Javascript objects and primitives from their string representation",
   "main": "index.js",
   "scripts": {
