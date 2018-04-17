@@ -1,3 +1,4 @@
+const isostring = require('isostring')
 const {duration} = require('moment')
 
 
@@ -47,8 +48,7 @@ function string2js(value)
   if(value.match(isoRegex)) return duration(value)
 
   // Date
-  const date = new Date(value)
-  if(date.toString() !== 'Invalid Date') return date
+  if(isostring(value)) return new Date(value)
 
   // JSON
   try

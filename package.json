@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/piranna/string2js#readme",
   "dependencies": {
+    "isostring": "0.0.1",
     "moment": "^2.22.0"
   }
 }
