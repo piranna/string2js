@@ -41,6 +41,10 @@ function string2js(value)
   // Undefined
   if(value === 'undefined') return
 
+  // Infinity and NaN
+  if(value === 'Infinity') return Infinity
+  if(value === 'NaN') return NaN
+
   // RegExp
   if(value.match(regexpRegex)) return RegExp(value)
 
